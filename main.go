@@ -1,16 +1,18 @@
 package main
 
-import(
-	//"fmt"   //*testing
-	//"rsc.io/quote"
+import (
 	"bytes"
 	"crypto/sha256"
 	"fmt"
 )
 
+type BlockChain struct {
+	blocks []*Block
+}
+
 type Block struct {
-	Hash	 []byte
-	Data	 []byte
+	Hash     []byte
+	Data     []byte
 	PrevHash []byte
 }
 
@@ -43,9 +45,9 @@ func InitBlockChain() *BlockChain {
 func main() {
 	chain := InitBlockChain()
 
-	chain.AddBlock("first block")
-	chain.AddBlock("2nd block")
-	chain.AddBlock("3rd block")
+	chain.AddBlock("first block (not including genesis)")
+	chain.AddBlock("second block")
+	chain.AddBlock("third block")
 
 	for _, block := range chain.blocks {
 		fmt.Printf("Previous Hash: %x\n", block.PrevHash)
